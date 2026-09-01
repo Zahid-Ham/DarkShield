@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, ArrowRight, Activity, Terminal, Lock, FileSearch, Cpu, CheckCircle } from 'lucide-react';
+import { Shield, ArrowRight, Activity, Terminal, Lock, FileSearch, Cpu, CheckCircle, Database } from 'lucide-react';
 import { Button } from '../components/common/Button.jsx';
 import { MOCK_INCIDENTS } from '../mock/incidents.js';
 
@@ -8,172 +8,213 @@ export function Landing({ onStart }) {
   const criticalCount = MOCK_INCIDENTS.filter(i => i.severity === 'CRITICAL').length;
 
   return (
-    <div style={{ maxWidth: '1100px', margin: '16px auto 32px' }}>
-      {/* Compact Hero Section */}
+    <div style={{ maxWidth: '1140px', margin: '10px auto 30px' }}>
+      {/* High-Impact Hero Banner */}
       <div style={{
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-surface)',
         border: '1px solid var(--border-medium)',
+        borderTop: '3px solid var(--accent-orange)',
         borderRadius: 'var(--radius-md)',
         padding: '32px 36px',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        boxShadow: 'var(--shadow-card)'
       }}>
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '6px',
-          padding: '2px 8px',
-          borderRadius: 'var(--radius-sm)',
-          backgroundColor: 'var(--accent-orange-light)',
-          color: 'var(--accent-orange)',
-          fontSize: '11px',
-          fontWeight: '700',
-          fontFamily: 'var(--font-mono)',
-          textTransform: 'uppercase',
-          marginBottom: '12px',
-          border: '1px solid var(--status-high-border)'
-        }}>
-          <Shield size={13} /> SIH26-S01 Security Operations Workstation
-        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+          <div style={{ maxWidth: '780px' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '3px 9px',
+              borderRadius: 'var(--radius-xs)',
+              backgroundColor: 'var(--accent-orange-subtle)',
+              color: 'var(--accent-orange)',
+              fontSize: '11px',
+              fontWeight: '700',
+              fontFamily: 'var(--font-mono)',
+              textTransform: 'uppercase',
+              marginBottom: '14px',
+              border: '1px solid var(--accent-orange-border)'
+            }}>
+              <Shield size={12} /> Autonomous Threat Investigation Engine
+            </div>
 
-        <h1 style={{
-          fontSize: '24px',
-          fontWeight: '800',
-          letterSpacing: '-0.01em',
-          color: 'var(--text-main)',
-          lineHeight: '1.3',
-          marginBottom: '12px'
-        }}>
-          Agentic AI Cybersecurity Assistant for Automated Threat Investigation
-        </h1>
+            <h1 style={{
+              fontSize: '26px',
+              fontWeight: '800',
+              letterSpacing: '-0.02em',
+              color: 'var(--text-primary)',
+              lineHeight: '1.25',
+              marginBottom: '12px'
+            }}>
+              Agentic AI Cybersecurity Assistant for Automated Threat Investigation
+            </h1>
 
-        <p style={{
-          fontSize: '13px',
-          color: 'var(--text-muted)',
-          maxWidth: '780px',
-          lineHeight: '1.6',
-          marginBottom: '20px'
-        }}>
-          Autonomous log ingestion, multi-stage attack correlation, evidence-backed manager explanations, and targeted mitigation playbooks for Security Operations Centers (SOC).
-        </p>
+            <p style={{
+              fontSize: '13px',
+              color: 'var(--text-secondary)',
+              lineHeight: '1.6',
+              marginBottom: '20px'
+            }}>
+              Ingest security logs, auto-correlate multi-stage attack chains across hosts, generate evidence-grounded manager briefs, and execute targeted mitigation playbooks for modern Security Operations Centers (SOC).
+            </p>
 
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <Button variant="primary" size="md" icon={ArrowRight} onClick={onStart}>
-            Start Investigation Workstream
-          </Button>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <Button variant="primary" size="lg" icon={ArrowRight} onClick={onStart}>
+                Launch Ingestion & Analysis Workstream
+              </Button>
+            </div>
+          </div>
+
+          <div style={{
+            backgroundColor: 'var(--bg-subtle)',
+            border: '1px solid var(--border-light)',
+            borderRadius: 'var(--radius-sm)',
+            padding: '16px',
+            minWidth: '220px',
+            fontFamily: 'var(--font-mono)'
+          }}>
+            <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>
+              System Environment
+            </div>
+            <div style={{ fontSize: '11px', color: 'var(--text-primary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div><strong style={{ color: 'var(--text-muted)' }}>ENGINE:</strong> FastAPI Python 3.14</div>
+              <div><strong style={{ color: 'var(--text-muted)' }}>CLIENT:</strong> React 18 + Vite</div>
+              <div><strong style={{ color: 'var(--text-muted)' }}>SCHEMA:</strong> JSON / EVTX / Sysmon</div>
+              <div><strong style={{ color: 'var(--text-muted)' }}>AGENTS:</strong> 4 Active Workers</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Operational Summary Bar */}
+      {/* Operational KPI Metric Strip */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '12px',
+        gap: '16px',
         marginBottom: '20px'
       }}>
         <div style={{
-          backgroundColor: 'var(--bg-secondary)',
-          border: '1px solid var(--border-light)',
+          backgroundColor: 'var(--bg-surface)',
+          border: '1px solid var(--border-medium)',
+          borderTop: '2px solid #22C55E',
           borderRadius: 'var(--radius-md)',
-          padding: '14px 16px'
+          padding: '16px',
+          boxShadow: 'var(--shadow-subtle)'
         }}>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)', textTransform: 'uppercase', fontWeight: '600', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em' }}>
             System Status
           </span>
-          <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--status-low-text)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <CheckCircle size={15} /> Operational
+          <div style={{ fontSize: '17px', fontWeight: '800', color: 'var(--status-low-text)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <CheckCircle size={16} /> Operational
           </div>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)', fontFamily: 'var(--font-mono)' }}>FastAPI + React Engine</span>
+          <span style={{ fontSize: '10px', color: 'var(--text-light)', fontFamily: 'var(--font-mono)' }}>SOC Pipeline Active</span>
         </div>
 
         <div style={{
-          backgroundColor: 'var(--bg-secondary)',
-          border: '1px solid var(--border-light)',
+          backgroundColor: 'var(--bg-surface)',
+          border: '1px solid var(--border-medium)',
+          borderTop: '2px solid var(--accent-orange)',
           borderRadius: 'var(--radius-md)',
-          padding: '14px 16px'
+          padding: '16px',
+          boxShadow: 'var(--shadow-subtle)'
         }}>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)', textTransform: 'uppercase', fontWeight: '600', letterSpacing: '0.04em' }}>
-            Correlated Incidents
+          <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em' }}>
+            Correlated Threats
           </span>
-          <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-main)', marginTop: '4px' }}>
-            {activeCount} Active <span style={{ fontSize: '12px', fontWeight: '600', color: 'var(--status-critical-text)' }}>({criticalCount} Critical)</span>
+          <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)', marginTop: '4px' }}>
+            {activeCount} Active <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--status-critical-text)' }}>({criticalCount} Critical)</span>
           </div>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>Multi-stage attack clusters</span>
+          <span style={{ fontSize: '10px', color: 'var(--text-light)' }}>Threat Clusters</span>
         </div>
 
         <div style={{
-          backgroundColor: 'var(--bg-secondary)',
-          border: '1px solid var(--border-light)',
+          backgroundColor: 'var(--bg-surface)',
+          border: '1px solid var(--border-medium)',
+          borderTop: '2px solid #0284C7',
           borderRadius: 'var(--radius-md)',
-          padding: '14px 16px'
+          padding: '16px',
+          boxShadow: 'var(--shadow-subtle)'
         }}>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)', textTransform: 'uppercase', fontWeight: '600', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em' }}>
             Monitored Entities
           </span>
-          <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-main)', marginTop: '4px' }}>
+          <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)', marginTop: '4px' }}>
             14 Hosts / 42 Users
           </div>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>Active domain environment</span>
+          <span style={{ fontSize: '10px', color: 'var(--text-light)' }}>Domain Telemetry</span>
         </div>
 
         <div style={{
-          backgroundColor: 'var(--bg-secondary)',
-          border: '1px solid var(--border-light)',
+          backgroundColor: 'var(--bg-surface)',
+          border: '1px solid var(--border-medium)',
+          borderTop: '2px solid #8B5CF6',
           borderRadius: 'var(--radius-md)',
-          padding: '14px 16px'
+          padding: '16px',
+          boxShadow: 'var(--shadow-subtle)'
         }}>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)', textTransform: 'uppercase', fontWeight: '600', letterSpacing: '0.04em' }}>
-            Ingested Log Records
+          <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em' }}>
+            Parsed Log Volume
           </span>
           <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--accent-orange)', marginTop: '4px' }}>
             14,200 Events
           </div>
-          <span style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>Normalized security events</span>
+          <span style={{ fontSize: '10px', color: 'var(--text-light)' }}>Normalized JSON Records</span>
         </div>
       </div>
 
-      {/* Restrained Workstation Capabilities Table */}
+      {/* Workstation Modules Table */}
       <div style={{
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-surface)',
         border: '1px solid var(--border-medium)',
         borderRadius: 'var(--radius-md)',
-        padding: '20px'
+        padding: '20px',
+        boxShadow: 'var(--shadow-subtle)'
       }}>
-        <h3 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-main)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-          Workstation Architecture Modules
-        </h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+          <div>
+            <h3 style={{ fontSize: '14px', fontWeight: '800', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Workstation Core Pipeline Modules
+            </h3>
+            <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+              Operational architecture setup for automated incident handling
+            </p>
+          </div>
+        </div>
+
         <table className="soc-table">
           <thead>
             <tr>
-              <th>Module</th>
-              <th>Operational Function</th>
-              <th>Key Outputs</th>
-              <th>Status</th>
+              <th style={{ width: '22%' }}>Pipeline Component</th>
+              <th style={{ width: '38%' }}>Operational Capability</th>
+              <th style={{ width: '28%' }}>Output Telemetry</th>
+              <th style={{ width: '12%', textAlign: 'right' }}>Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style={{ fontWeight: '600' }}>Log Ingestion & Normalization</td>
-              <td>Ingests raw JSON EDR/SIEM event logs or live URL streams</td>
-              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px' }}>Parsed JSON schema, Event ID indexing</td>
-              <td><span style={{ color: 'var(--status-low-text)', fontWeight: '600', fontSize: '11px' }}>READY</span></td>
+              <td style={{ fontWeight: '700' }}>Log Ingestion Engine</td>
+              <td>Ingests raw JSON logs or HTTP stream endpoints for event normalization</td>
+              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>NDJSON / EVTX Parsed Objects</td>
+              <td style={{ textAlign: 'right' }}><span style={{ color: 'var(--status-low-text)', fontWeight: '700', fontSize: '10px', fontFamily: 'var(--font-mono)' }}>[READY]</span></td>
             </tr>
             <tr>
-              <td style={{ fontWeight: '600' }}>Multi-Agent Correlation</td>
-              <td>Links isolated security events across hosts into chronological attack graphs</td>
-              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px' }}>Attack chains, Risk scores, Confidence</td>
-              <td><span style={{ color: 'var(--status-low-text)', fontWeight: '600', fontSize: '11px' }}>READY</span></td>
+              <td style={{ fontWeight: '700' }}>Attack Chain Correlator</td>
+              <td>Links isolated security logs into chronological multi-stage attack graphs</td>
+              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>Threat Clusters & Risk Scores</td>
+              <td style={{ textAlign: 'right' }}><span style={{ color: 'var(--status-low-text)', fontWeight: '700', fontSize: '10px', fontFamily: 'var(--font-mono)' }}>[READY]</span></td>
             </tr>
             <tr>
-              <td style={{ fontWeight: '600' }}>Contextual Manager Explanation</td>
-              <td>Context-locked chat assistant translating technical telemetry into executive briefs</td>
-              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px' }}>Executive Summaries, Risk impact</td>
-              <td><span style={{ color: 'var(--status-low-text)', fontWeight: '600', fontSize: '11px' }}>READY</span></td>
+              <td style={{ fontWeight: '700' }}>Contextual Manager Assistant</td>
+              <td>Translates complex incident telemetry into executive briefs locked to case context</td>
+              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>Executive Summaries & Q&A</td>
+              <td style={{ textAlign: 'right' }}><span style={{ color: 'var(--status-low-text)', fontWeight: '700', fontSize: '10px', fontFamily: 'var(--font-mono)' }}>[READY]</span></td>
             </tr>
             <tr>
-              <td style={{ fontWeight: '600' }}>Mitigation Playbooks</td>
-              <td>Phased containment and recovery steps prioritized by asset criticality</td>
-              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px' }}>Containment steps, GPO recommendations</td>
-              <td><span style={{ color: 'var(--status-low-text)', fontWeight: '600', fontSize: '11px' }}>READY</span></td>
+              <td style={{ fontWeight: '700' }}>Mitigation Playbook Engine</td>
+              <td>Generates containment, recovery, and GPO prevention playbooks by asset criticality</td>
+              <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>Action Steps & Asset Targets</td>
+              <td style={{ textAlign: 'right' }}><span style={{ color: 'var(--status-low-text)', fontWeight: '700', fontSize: '10px', fontFamily: 'var(--font-mono)' }}>[READY]</span></td>
             </tr>
           </tbody>
         </table>

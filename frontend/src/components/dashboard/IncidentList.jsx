@@ -15,14 +15,14 @@ export function IncidentList({
         display: 'flex',
         justify: 'space-between',
         alignItems: 'center',
-        marginBottom: '10px'
+        marginBottom: '12px'
       }}>
         <div>
-          <h2 style={{ fontSize: '14px', fontWeight: '800', color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+          <h2 style={{ fontSize: '15px', fontWeight: '800', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
             Correlated Incident Case File ({incidents.length})
           </h2>
-          <p style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
-            Automated correlation of normalized event logs into prioritized security incident clusters
+          <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+            Automated correlation of normalized security event logs into prioritized threat clusters
           </p>
         </div>
       </div>
@@ -30,12 +30,12 @@ export function IncidentList({
       {/* Incident rows list */}
       {incidents.length === 0 ? (
         <div style={{
-          padding: '30px',
+          padding: '36px',
           textAlign: 'center',
-          backgroundColor: 'var(--bg-secondary)',
-          borderRadius: 'var(--radius-sm)',
-          border: '1px solid var(--border-light)',
-          color: 'var(--text-subtle)',
+          backgroundColor: 'var(--bg-surface)',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid var(--border-medium)',
+          color: 'var(--text-muted)',
           fontSize: '12px'
         }}>
           No active security incident clusters recorded.

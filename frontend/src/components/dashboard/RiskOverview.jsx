@@ -15,106 +15,114 @@ export function RiskOverview({ incidents = [], onGenerateReport }) {
     <div style={{
       display: 'grid',
       gridTemplateColumns: 'repeat(4, 1fr)',
-      gap: '12px',
-      marginBottom: '16px'
+      gap: '14px',
+      marginBottom: '20px'
     }}>
-      {/* Security Posture Status */}
+      {/* Overall Security Posture */}
       <div style={{
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-surface)',
         border: '1px solid var(--border-medium)',
+        borderTop: '3px solid var(--accent-orange)',
         borderRadius: 'var(--radius-md)',
-        padding: '12px 14px',
+        padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
-        justify: 'space-between'
+        justify: 'space-between',
+        boxShadow: 'var(--shadow-subtle)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--text-subtle)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Overall Security Posture
+          <span style={{ fontSize: '10px', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Overall Risk Index
           </span>
-          <ShieldAlert size={14} color="var(--accent-orange)" />
+          <ShieldAlert size={15} color="var(--accent-orange)" />
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '6px' }}>
-          <span style={{ fontSize: '20px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-main)' }}>
-            {maxRiskScore}<span style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>/100</span>
+          <span style={{ fontSize: '22px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>
+            {maxRiskScore}<span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>/100</span>
           </span>
           <RiskBadge severity={overallSeverity} label={overallSeverity} />
         </div>
-        <span style={{ fontSize: '10px', color: 'var(--text-subtle)', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
-          Max Threat Index
+        <span style={{ fontSize: '10px', color: 'var(--text-light)', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
+          Max Threat Score Recorded
         </span>
       </div>
 
-      {/* Active Correlated Incidents */}
+      {/* Active Correlated Threats */}
       <div style={{
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-surface)',
         border: '1px solid var(--border-medium)',
+        borderTop: '2px solid #0284C7',
         borderRadius: 'var(--radius-md)',
-        padding: '12px 14px',
+        padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
-        justify: 'space-between'
+        justify: 'space-between',
+        boxShadow: 'var(--shadow-subtle)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--text-subtle)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: '10px', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             Active Correlated Threats
           </span>
-          <Activity size={14} color="var(--text-muted)" />
+          <Activity size={15} color="var(--text-muted)" />
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '6px' }}>
-          <span style={{ fontSize: '20px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-main)' }}>
+          <span style={{ fontSize: '22px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>
             {activeCount}
           </span>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
             ({criticalCount} Critical, {highCount} High)
           </span>
         </div>
-        <span style={{ fontSize: '10px', color: 'var(--text-subtle)', marginTop: '4px' }}>
-          Auto-correlated attack clusters
+        <span style={{ fontSize: '10px', color: 'var(--text-light)', marginTop: '4px' }}>
+          Active Threat Clusters
         </span>
       </div>
 
-      {/* Ingested Telemetry Stats */}
+      {/* Analyzed Events */}
       <div style={{
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-surface)',
         border: '1px solid var(--border-medium)',
+        borderTop: '2px solid #22C55E',
         borderRadius: 'var(--radius-md)',
-        padding: '12px 14px',
+        padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
-        justify: 'space-between'
+        justify: 'space-between',
+        boxShadow: 'var(--shadow-subtle)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--text-subtle)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Analyzed Event Records
+          <span style={{ fontSize: '10px', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Analyzed Event Logs
           </span>
-          <Layers size={14} color="var(--text-muted)" />
+          <Layers size={15} color="var(--text-muted)" />
         </div>
         <div style={{ marginTop: '6px' }}>
-          <span style={{ fontSize: '20px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-main)' }}>
+          <span style={{ fontSize: '22px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>
             14,200
           </span>
         </div>
-        <span style={{ fontSize: '10px', color: 'var(--text-subtle)', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
-          Normalized JSON telemetry
+        <span style={{ fontSize: '10px', color: 'var(--text-light)', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
+          Normalized JSON Records
         </span>
       </div>
 
-      {/* Reporting Action Box */}
+      {/* Executive Report Action */}
       <div style={{
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-surface)',
         border: '1px solid var(--border-medium)',
+        borderTop: '2px solid #8B5CF6',
         borderRadius: 'var(--radius-md)',
-        padding: '12px 14px',
+        padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
-        justify: 'space-between'
+        justify: 'space-between',
+        boxShadow: 'var(--shadow-subtle)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--text-subtle)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Executive Action
+          <span style={{ fontSize: '10px', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Reporting Output
           </span>
-          <FileText size={14} color="var(--text-muted)" />
+          <FileText size={15} color="var(--text-muted)" />
         </div>
         <div style={{ marginTop: '6px' }}>
           <Button 
@@ -127,8 +135,8 @@ export function RiskOverview({ incidents = [], onGenerateReport }) {
             Generate Incident Report
           </Button>
         </div>
-        <span style={{ fontSize: '10px', color: 'var(--text-subtle)', marginTop: '4px' }}>
-          Compile PDF for stakeholders
+        <span style={{ fontSize: '10px', color: 'var(--text-light)', marginTop: '4px' }}>
+          Compile PDF Evidence Brief
         </span>
       </div>
     </div>

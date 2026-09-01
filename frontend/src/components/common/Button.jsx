@@ -15,12 +15,12 @@ export function Button({
   let border = '1px solid var(--accent-orange)';
 
   if (variant === 'secondary') {
-    bg = 'var(--bg-secondary)';
-    color = 'var(--text-main)';
+    bg = 'var(--bg-subtle)';
+    color = 'var(--text-primary)';
     border = '1px solid var(--border-medium)';
   } else if (variant === 'outline') {
-    bg = 'transparent';
-    color = 'var(--text-main)';
+    bg = 'var(--bg-surface)';
+    color = 'var(--text-primary)';
     border = '1px solid var(--border-medium)';
   } else if (variant === 'danger') {
     bg = 'var(--status-critical-text)';
@@ -29,9 +29,9 @@ export function Button({
   }
 
   const paddingMap = {
-    sm: '4px 10px',
-    md: '6px 12px',
-    lg: '8px 16px'
+    sm: '5px 10px',
+    md: '7px 14px',
+    lg: '10px 18px'
   };
 
   const fontSizeMap = {
@@ -58,9 +58,10 @@ export function Button({
         border: border,
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.6 : 1,
-        transition: 'background-color 0.12s ease, border-color 0.12s ease',
-        boxShadow: 'var(--shadow-sm)',
+        transition: 'all 0.15s ease',
+        boxShadow: variant === 'primary' ? '0 1px 2px rgba(234, 88, 12, 0.2)' : 'var(--shadow-subtle)',
         whiteSpace: 'nowrap',
+        letterSpacing: '0.01em',
         ...style
       }}
       {...props}

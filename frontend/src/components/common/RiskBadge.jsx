@@ -10,21 +10,21 @@ export function RiskBadge({ severity, label, score }) {
         display: 'inline-flex',
         alignItems: 'center',
         gap: '4px',
-        padding: '2px 6px',
-        borderRadius: 'var(--radius-sm)',
+        padding: '3px 8px',
+        borderRadius: 'var(--radius-xs)',
         fontSize: '11px',
         fontWeight: '700',
         fontFamily: 'var(--font-mono)',
-        letterSpacing: '0.02em',
+        letterSpacing: '0.04em',
         backgroundColor: style.bg,
         color: style.text,
         border: `1px solid ${style.border}`,
-        lineHeight: '1.2'
+        lineHeight: '1'
       }}
     >
       <span>{label || severity}</span>
       {score !== undefined && (
-        <span style={{ opacity: 0.85, fontSize: '10px' }}>[{score}]</span>
+        <span style={{ opacity: 0.85, fontSize: '10px', marginLeft: '2px' }}>[{score}]</span>
       )}
     </span>
   );
