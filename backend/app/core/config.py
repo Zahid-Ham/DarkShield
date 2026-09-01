@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import List
+from typing import List, Optional
 
 
 class Settings(BaseSettings):
@@ -9,6 +9,10 @@ class Settings(BaseSettings):
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
     ALLOWED_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173"
+
+    GITHUB_TOKEN: Optional[str] = None
+    GITHUB_OWNER: str = "Zahid-Ham"
+    GITHUB_REPO: str = "DarkShield"
 
     @property
     def allowed_origins_list(self) -> List[str]:
