@@ -8,6 +8,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 /**
  * Service Abstraction Layer for SIH26-S01 Cybersecurity Assistant.
  * Communicates strictly with the FastAPI backend engine.
+ * Never exposes GitHub tokens or credentials to the browser or localStorage.
  */
 
 // ---------------------------------------------------------------------------
@@ -36,7 +37,7 @@ export async function checkIngestHealth() {
 }
 
 // ---------------------------------------------------------------------------
-// GitHub Integration Endpoints (FastAPI Proxied - No token in browser)
+// GitHub Integration Endpoints (FastAPI Proxied)
 // ---------------------------------------------------------------------------
 
 export async function fetchGitHubStatus() {
@@ -60,6 +61,68 @@ export async function fetchGitHubStatus() {
   }
 }
 
+export async function connectGitHubToken(token) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/github/connect`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token.trim() })
+    });
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail?.message || `Authentication failed: HTTP ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function fetchGitHubRepos() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/github/repos`);
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail?.message || `HTTP ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    console.warn("Failed to fetch repositories:", err.message);
+    return [];
+  }
+}
+
+export async function fetchGitHubWorkflows(owner, repo) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/github/repos/${owner}/${repo}/workflows`);
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail?.message || `HTTP ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    console.warn(`Failed to fetch workflows for ${owner}/${repo}:`, err.message);
+    return [];
+  }
+}
+
+export async function configureGitHubTarget(targetData) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/github/configure`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(targetData)
+    });
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail?.message || `HTTP ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function fetchGitHubRuns(limit = 10) {
   try {
     const res = await fetch(`${API_BASE_URL}/github/runs?limit=${limit}`);
@@ -67,7 +130,7 @@ export async function fetchGitHubRuns(limit = 10) {
     return await res.json();
   } catch (err) {
     console.warn("Failed to fetch workflow runs:", err.message);
-    return { owner: "Not available", repo: "Not available", total_count: 0, runs: [] };
+    return { owner: "Not configured", repo: "Not configured", total_count: 0, runs: [] };
   }
 }
 

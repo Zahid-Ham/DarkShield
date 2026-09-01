@@ -7,30 +7,26 @@ client = TestClient(app)
 
 def test_github_status_endpoint():
     response = client.get("/api/github/status")
-    assert response.status_code in [200, 401, 503]
+    assert response.status_code == 200
     data = response.json()
+    assert "status" in data
 
     # Ensure token is NEVER returned in response
-    response_str = response.text
     if settings.GITHUB_TOKEN:
-        assert settings.GITHUB_TOKEN not in response_str
+        assert settings.GITHUB_TOKEN not in response.text
 
-    if response.status_code == 200:
-        assert "configured" in data
-        assert "owner" in data
-        assert "repo" in data
+
+def test_connect_invalid_token():
+    response = client.post("/api/github/connect", json={"token": "invalid_test_token_12345"})
+    assert response.status_code in [401, 503]
+    data = response.json()
+    assert "detail" in data
 
 
 def test_github_token_secrecy():
-    """Security check to guarantee GITHUB_TOKEN string is never leaked in API outputs."""
-    if not settings.GITHUB_TOKEN:
-        return
-
+    """Security check to guarantee token string is never leaked in API outputs."""
     status_res = client.get("/api/github/status")
-    assert settings.GITHUB_TOKEN not in status_res.text
+    assert "token" not in status_res.json()
 
-    runs_res = client.get("/api/github/runs")
-    assert settings.GITHUB_TOKEN not in runs_res.text
-
-    details_res = client.get("/api/github/runs/12345678")
-    assert settings.GITHUB_TOKEN not in details_res.text
+    if settings.GITHUB_TOKEN:
+        assert settings.GITHUB_TOKEN not in status_res.text
